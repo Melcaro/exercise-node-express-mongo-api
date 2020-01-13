@@ -1,7 +1,7 @@
 const ProductsRouter = require('./routes/productRoute');
 
 const routes = app => {
-  app.get('/api/v1/products', ProductsRouter);
+  app.use('/api/v1/products', ProductsRouter);
 };
 
-module.exports = { routes };
+module.exports = routes;

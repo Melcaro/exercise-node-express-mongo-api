@@ -18,14 +18,33 @@ const addProducts = async products => {
   try {
     const { result } = await db.collection('products').insertMany(products);
     console.log(result);
-    return result
+    return result;
   } catch (e) {
     console.log(e);
   }
 };
 
-const addOneProduct = async(product)=>{
-  try
-}
+const addOneProduct = async product => {
+  console.log('product in store', product);
+  try {
+    const { result } = await db.collection('products').insertOne(product);
+    return result;
+  } catch (e) {
+    console.log(e);
+  }
+};
 
-module.exports = { initializeDatabase, addProducts };
+const removeAllProducts = async () => {
+  try {
+    return await db.collection('products').deleteMany({});
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+module.exports = {
+  initializeDatabase,
+  addProducts,
+  addOneProduct,
+  removeAllProducts,
+};

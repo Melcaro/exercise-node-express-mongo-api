@@ -4,4 +4,4 @@ const middlewares = app => {
   app.use(express.json());
 };
 
-module.exports = { middlewares };
+module.exports = middlewares;
