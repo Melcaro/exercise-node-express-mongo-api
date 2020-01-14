@@ -1,4 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
+const ObjectId = require('mongodb').ObjectID;
 const { auth } = require('../services/auth');
 
 const url = 'mongodb://192.168.99.100:27017';
@@ -34,9 +35,29 @@ const addOneProduct = async product => {
   }
 };
 
+const updateAProduct = async (productID, product) => {
+  try {
+    return await db
+      .collection('products')
+      .updateOne({ _id: ObjectId(productID) }, { $set: product });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 const removeAllProducts = async () => {
   try {
     return await db.collection('products').deleteMany({});
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+const removeAProduct = async productID => {
+  try {
+    return await db
+      .collection('products')
+      .deleteOne({ _id: ObjectId(productID) });
   } catch (e) {
     console.log(e);
   }
@@ -46,5 +67,7 @@ module.exports = {
   initializeDatabase,
   addProducts,
   addOneProduct,
+  updateAProduct,
   removeAllProducts,
+  removeAProduct,
 };

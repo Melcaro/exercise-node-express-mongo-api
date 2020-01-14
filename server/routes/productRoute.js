@@ -3,8 +3,8 @@ const ProductsCtrl = require('../controllers/ProductsController');
 
 router.post('/', ProductsCtrl.addOneProduct);
 
-router.put('/:productID');
+router.put('/:productID', ProductsCtrl.updateOneProduct);
 
-router.delete('/:productID');
+router.delete('/:productID', ProductsCtrl.deleteOneProduct);
 
 module.exports = router;
