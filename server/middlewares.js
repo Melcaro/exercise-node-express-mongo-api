@@ -1,7 +1,7 @@
 const express = require('express');
 
-const middlewares = app => {
+function middlewares(app) {
   app.use(express.json());
-};
+}
 
 module.exports = middlewares;

@@ -15,6 +15,26 @@ const initializeDatabase = async () => {
   db = client.db('products');
 };
 
+const fetchAllProducts = async (
+  criteria = '',
+  order = 1,
+  pageSize = 10,
+  page = 0
+) => {
+  console.log(pageSize);
+  try {
+    return await db
+      .collection('products')
+      .find()
+      .sort({ [criteria]: order })
+      .limit(pageSize)
+      .skip(pageSize * page)
+      .toArray();
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 const addProducts = async products => {
   try {
     const { result } = await db.collection('products').insertMany(products);
@@ -26,7 +46,6 @@ const addProducts = async products => {
 };
 
 const addOneProduct = async product => {
-  console.log('product in store', product);
   try {
     const { result } = await db.collection('products').insertOne(product);
     return result;
@@ -65,6 +84,7 @@ const removeAProduct = async productID => {
 
 module.exports = {
   initializeDatabase,
+  fetchAllProducts,
   addProducts,
   addOneProduct,
   updateAProduct,

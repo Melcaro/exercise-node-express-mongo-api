@@ -12,7 +12,7 @@
   "scripts": {
     "start:dev": "nodemon index.js",
     "initDB": "node ./scripts/init.js",
-    "start mongo": "docker container run -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=melcaro -e MONGO_INITDB_ROOT_PASSWORD=1234 mongo:latest",
+    "start mongo": "docker container rm -f mongo-products; docker container run  -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=melcaro  -e MONGO_INITDB_ROOT_PASSWORD=1234 --name mongo-products mongo:latest",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

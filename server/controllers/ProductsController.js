@@ -1,5 +1,16 @@
 const ProductStore = require('../store/ProductsStore');
 
+const getAllProducts = async (req, res) => {
+  const { criteria, order, pageSize, page } = req.query;
+  const result = await ProductStore.fetchAllProducts(
+    criteria,
+    Number(order),
+    Number(pageSize),
+    page
+  );
+  return res.send(result);
+};
+
 const addOneProduct = async (req, res) => {
   const product = req.body;
   const result = await ProductStore.addOneProduct(product);
@@ -20,4 +31,9 @@ const deleteOneProduct = async (req, res) => {
   return res.send(result);
 };
 
-module.exports = { addOneProduct, updateOneProduct, deleteOneProduct };
+module.exports = {
+  getAllProducts,
+  addOneProduct,
+  updateOneProduct,
+  deleteOneProduct,
+};
