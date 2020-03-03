@@ -21,7 +21,6 @@ const fetchAllProducts = async (
   pageSize = 10,
   page = 0
 ) => {
-  console.log(pageSize);
   try {
     return await db
       .collection('products')
@@ -38,7 +37,6 @@ const fetchAllProducts = async (
 const addProducts = async products => {
   try {
     const { result } = await db.collection('products').insertMany(products);
-    console.log(result);
     return result;
   } catch (e) {
     console.log(e);
